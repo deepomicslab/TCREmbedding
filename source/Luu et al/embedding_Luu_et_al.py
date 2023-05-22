@@ -1,0 +1,101 @@
+class EmbeddingLuuEtAl:
+    """
+    This class takes the embedding operations on cdr3 and epitope sequences from the methods of Luu et al.
+
+    reference:
+        - Article: Predicting TCR-epitope binding specificity using deep metric learning and multimodal learning
+        - Authors: Luu, A. M., Leistico, J. R., Miller, T., Kim, S. & Song, J. S.
+        - DOI link: https://doi.org/10.3390%2Fgenes12040572
+        - GitHub link: https://github.com/jssong-lab/TCR-Epitope-Binding
+
+    Please download the source code from reference GitHub link and directly put this file into the main directory /TCR-Epitope-Binding-main.
+
+    Files required:
+        - /TCR-Epitope-Binding-main/atchley.pk
+        - /TCR-Epitope-Binding-main/data_processing.py
+    """
+
+    df_data = None
+    TCR_PAD_LENGTH = 20
+    EP_PAD_LENGTH = 10
+
+    def __init__(self, file_path, tcr_pad_length=20, ep_pad_length=10):
+        '''
+        Read cdr3 and epitope data from csv files.
+
+        Csv file example:
+            cdr3,antigen.epitope
+            CASSSGQLTNTEAFF,GLCTLVAML
+            CASSASARPEQFF,GLCTLVAML
+            CASSSGLLTADEQFF,GLCTLVAML
+
+        :param file_path: Path of the csv file
+        '''
+        import pandas as pd
+        df = pd.read_csv(file_path)
+        df = df[(df['antigen.epitope'].str.match('^[A-Z]{1,10}$')) &
+                (~df['antigen.epitope'].str.contains('B|J|O|U|X|Z')) &
+                (df['cdr3'].str.match('^[A-Z]{1,20}$')) &
+                (~df['cdr3'].str.contains('B|J|O|U|X|Z'))]
+        self.df_data = df
+        self.TCR_PAD_LENGTH = tcr_pad_length
+        self.EP_PAD_LENGTH = ep_pad_length
+
+    def embed(self):
+        '''
+        Embed CDR3 and epitope chain.
+
+        :return:
+          - X: embedded CDR3 pandas data frame (n, 20, 6) and
+          - y: embedded epitope pandas data frame (n, 10, 6)
+        '''
+        import data_processing as dp
+        import pickle as pk
+
+        aa_vec = pk.load(open('atchley.pk', 'rb'))
+
+        X = dp.encode_seq_array(self.df_data['cdr3'], aa_vec, True, self.TCR_PAD_LENGTH)
+        y = dp.encode_seq_array(self.df_data['antigen.epitope'], aa_vec, True, self.EP_PAD_LENGTH)
+
+        return X, y
+
+
+def csv_modifier(input_path='../dataset/merged_data/combined_dataset.csv', output_path='../dataset/testdata_LuuEtAl.csv', rows=200):
+    '''
+    Modify /dataset/merged_data/combined_dataset.csv to Luu et al data format.
+
+    :param input_path: input csv file path
+    :param output_path: output csv file path
+    :param rows: first n rows of data from origin csv file
+    :return: True if successful
+    '''
+
+    import pandas as pd
+
+    df = pd.read_csv(input_path, nrows=rows)
+
+    # Feel free to modify the following statements if you want to use your own data.
+    df = df.drop(columns=['Affinity'])
+    df = df.rename(columns={'Epitope': 'antigen.epitope'})
+    df = df.rename(columns={'CDR3': 'cdr3'})
+    df = df.reindex(columns=['cdr3', 'antigen.epitope'])
+
+    df = df[(df['antigen.epitope'].str.match('^[A-Z]{1,10}$')) &
+            (~df['antigen.epitope'].str.contains('B|J|O|U|X|Z')) &
+            (df['cdr3'].str.match('^[A-Z]{1,20}$')) &
+            (~df['cdr3'].str.contains('B|J|O|U|X|Z'))]
+
+    df.to_csv(path_or_buf=output_path, index=False)
+
+    return True
+
+
+if __name__ == '__main__':
+    # if you want to use your own data
+    # csv_modifier(rows=200)
+    # file_path = 'testdata_LuuEtAl.csv'
+    file_path = 'positive.csv'
+    embedding = EmbeddingLuuEtAl(file_path)
+    X, y = embedding.embed()
+    print(X.shape)
+    print(y.shape)
