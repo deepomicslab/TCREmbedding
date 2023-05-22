@@ -33,7 +33,11 @@ After embedding, each amino acid sequence of CDR3 will be mapped as a $6\times20
 
 
 ## Reference:
+
 ​    \- Article: Predicting TCR-epitope binding specificity using deep metric learning and multimodal learning
+
 ​    \- Authors: Luu, A. M., Leistico, J. R., Miller, T., Kim, S. & Song, J. S.
+
 ​    \- DOI link: https://doi.org/10.3390%2Fgenes12040572
+
 ​    \- GitHub link: https://github.com/jssong-lab/TCR-Epitope-Binding
