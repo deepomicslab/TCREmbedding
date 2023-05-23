@@ -3,6 +3,7 @@ from tcrdist.repertoire import TCRrep
 from input.vdjdb import parse_vdjdb
 
 class embeddingTCRdist:
+    def __init__():
 
     def embed(data=None, chain='beta', sparse=False):
         '''
