@@ -1,7 +1,10 @@
 from lib import iSMARTf3
 
 class embeddingismart:
-
+    
+    def __init__():
+        
+        
     #run pairwise alignment algorithm to analyze CDR3s
     def embed(data):
         '''
