@@ -1,9 +1,9 @@
 import giana
 
 class EmbeddingGIANA:
-
     # Encode CDR3 sequences into 96 dimensional space,a CDR3 sequence is converted into a 96-dimensional vector.
-
+    def __init__():
+    
     def embed(data, ST=3, verbose=True):
 
         '''
