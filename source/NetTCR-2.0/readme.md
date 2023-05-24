@@ -37,6 +37,9 @@ After embedding, each amino acid sequence will be mapped as a $n\times20$ matrix
 ## Reference:
 
 \- Article: NetTCR-2.0 enables accurate prediction of TCR-peptide binding by using paired TCRα and β sequence data
+
 \- Authors: Montemurro, A. et al
+
 \- DOI link: https://doi.org/10.1038%2Fs42003-021-02610-3
+
 \- GitHub link: https://github.com/mnielLab/NetTCR-2.0
