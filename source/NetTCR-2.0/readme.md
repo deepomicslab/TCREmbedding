@@ -24,11 +24,13 @@ QQRVRAGISSYEQY,GILGFVFTL,1
 ......
 ```
 
-where the amino acid sequence should consist of CAPITAL alphabets and not contain B, J, O, U, X and Z. 
+where the amino acid sequence should consist of upper case letters and not contain B, J, O, U, X and Z.
 
-If you want to use your own csv data, you need to make sure that your csv file is in the required format.
+The script processes a specified column of amino acid sequences in the input csv file, supporting CDR3α, CDR3β, peptide and any other sequences expressed as amino acids.
 
-After embedding, each amino acid sequence  will be mapped as a $n\times20$ matrix, where $n$ is the maximum length of a single sequence with padding. They will be represented in `Pandas ` `DataFrame`  type.
+If you want to use your own csv data, you need to make sure that your csv file contains at least one sequence column.
+
+After embedding, each amino acid sequence will be mapped as a $n\times20$ matrix, where $n$ is the maximum length of a single sequence with padding. They will be represented in `Pandas` `DataFrame` type.
 
 
 
