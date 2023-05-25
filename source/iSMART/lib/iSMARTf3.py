@@ -188,7 +188,14 @@ def parseinput(data):
     CDR3s = []
     for index, value in data.items():
         if value.startswith('C') and value.endswith('F'):
-            CDR3s.append(value)
+            for i in list(value):
+                if i not in ['A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V']:
+                    flag = False
+                    break
+            if flag:
+                CDR3s.append(value)
+            else:
+                continue
     return CDR3s
 
 def embedding(data):
