@@ -1,4 +1,4 @@
-from tcellmatch.utils.utils_aa_embedding import read_blosum, encode_as_blosum, encode_as_onehot
+from utils.utils_aa_embedding import read_blosum, encode_as_blosum, encode_as_onehot
 import pandas as pd
 import numpy as np
 from typing import Union
