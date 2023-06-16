@@ -1,4 +1,29 @@
-class EmbeddingSETEStandalone :
+def merge(a, b):
+    """
+    Merge np.ndarray 'a' with dictionary 'b'.
+
+    :param a: 2d np.ndarray of shape (x, y)
+    :param b: dictionary with y entries
+    :return: merged structured np.ndarray with the same shape as 'a', where column indices are replaced by the keys of dictionary 'b'
+    :raises: AssertionError, if  the number of entries of 'b' does not match the number of columns in 'a'
+    """
+    import numpy as np
+    assert len(b) == a.shape[1], "Number of columns in 'a' should match the number of keys in 'b' dictionary."
+
+    # get all keys from dictionary b
+    keys = list(b.keys())
+
+    # create a new structured array 'c' with keys only, no values
+    c = np.zeros((a.shape[0],), dtype=[(key, a.dtype) for key in keys])
+
+    # Set the corresponding key for each column in 'c'
+    for i, key in enumerate(keys):
+        c[key] = a[:, i]
+
+    return c
+
+
+class EmbeddingSETEStandalone:
     """
     This class takes the embedding operations on cdr3 sequences from SETE.
     Each cdr3 sequence will be embedded into 1d numpy ndarray.
@@ -11,7 +36,7 @@ class EmbeddingSETEStandalone :
         - GitHub link: https://github.com/wonanut/SETE
     """
 
-    def __init__(self, input_file_path = './data/test.csv'):
+    def __init__(self, input_file_path='./data/test.csv'):
         '''
         Set original csv path.
 
@@ -90,7 +115,7 @@ class EmbeddingSETEStandalone :
 
     def embed(self, k=3, remove_duplicate=False):
         '''
-        
+
         Embed cdr3 sequence into 1d numpy ndarray.
 
         :param k:
@@ -117,19 +142,24 @@ class EmbeddingSETEStandalone :
 
         statistics_epi = []
         statistics_num = []
-        # print('{:22s} {:s}'.format('Epitope', 'Number'))
+        print('{:22s} {:s}'.format('Epitope', 'Number'))
         for epi in epiDict:
             statistics_epi.append(epi)
             statistics_num.append(len(epiDict[epi]))
-            # print('{:22s} {:d}'.format(epi, len(epiDict[epi])))
+            print('{:22s} {:d}'.format(epi, len(epiDict[epi])))
 
         kmerDict = self.statisticsKmer(epiDict, k)
         X, y = self.buildFeatures(epiDict, kmerDict, k)
 
-        return X, kmerDict
+        return X, kmerDict, merge(X, kmerDict)
+
 
 if __name__ == '__main__':
-    embedding = EmbeddingSETEStandalone('./data/epitope_tcr_pairs.csv')
-    X, kmerDict = embedding.embed(k=3)
-    print(X.shape)
-    print(kmerDict)
+    embedding = EmbeddingSETEStandalone('./data/test.csv')
+    X, kmerDict, merged = embedding.embed(k=3)
+    # example:
+    # print(merged.dtype.names)
+    # print(merged[3]['PYG'])  # 0.0
+    # print(merged[3]['YGY'])  # 0.0
+    # print(merged[4]['PYG'])  # 0.0
+    # print(merged[4]['YGY'])  # 1.0
