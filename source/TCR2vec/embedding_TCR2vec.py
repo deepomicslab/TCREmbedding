@@ -35,7 +35,7 @@ class EmbeddingTCR2vec:
         """
         self.dset = TCRLabeledDset(file_path, only_tcr=True, use_column=column_name)
 
-    def embed(self, batch_size = 512):
+    def encode(self, batch_size = 512):
         """Get the embeddings for the loaded TCR sequences.
 
         Returns:
@@ -55,5 +55,5 @@ if __name__ == '__main__':
     embedder.read_csv(file_path='./data/sample.csv', column_name='full_seq')
 
     # Get embeddings
-    X = embedder.embed()
+    X = embedder.encode()
     print(X.shape)
