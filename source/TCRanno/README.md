@@ -18,5 +18,4 @@ Set `model_path=None` to use the default model (provided by TCRanno)
 
 ## Usage
 
-For more details, refer to the original TCRanno repository: https://github.com/deepomicslab/TCRanno/tree/main
-[Reference paper](https://pubmed.ncbi.nlm.nih.gov/37150761/)
+For more details, refer to the original TCRanno [github repository](https://github.com/deepomicslab/TCRanno/tree/main) and [reference paper](https://pubmed.ncbi.nlm.nih.gov/37150761/)
