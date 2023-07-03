@@ -3,7 +3,7 @@ Qualitative and Quantitative Annotations of T-Cell Receptor (TCR) Repertoire Spe
 
 ## Requirements
 ```
-Python>=3.7.6 \
+Python>=3.7.6
 tensorflow>=2.4.1, levenshtein, pandas, matplotlib, comut, palettable
 ```
 ## Installation
@@ -14,8 +14,9 @@ pip3 install tcranno
 
 ## Use the pre-trained models
 
-Set model_path=None to use the default model (provided by TCRanno)
+Set `model_path=None` to use the default model (provided by TCRanno)
 
 ## Usage
 
-For more details, refer to the original TCR2vec repository: https://github.com/deepomicslab/TCRanno/tree/main
+For more details, refer to the original TCRanno repository: https://github.com/deepomicslab/TCRanno/tree/main
+[Reference paper](https://pubmed.ncbi.nlm.nih.gov/37150761/)
