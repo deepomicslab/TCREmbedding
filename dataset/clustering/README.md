@@ -2,7 +2,7 @@
 
 `TCRantigenData_unique.tsv`: RAW DATA, TCR cdr3 sequences with antigen labels. Downloaded from GIANA project ([github](https://github.com/s175573/GIANA/blob/master/data/), [paper (see fig. 2)](https://www.nature.com/articles/s41467-021-25006-7)).
 
-`TCRantigenData_unique_filt.tsv`: Processed data, filtered by script  `TCRantigenData_unique_filt.tsv`
+`TCRantigenData_unique_filt.tsv`: Processed data, filtered by script  `TCRantigenData_process.py`
 
 columns in the processed data:
 
@@ -28,14 +28,17 @@ Here show top 10 Antigens:
 
 | Antigen | TCR_num |  
 |:-:|:-:|  
-| CMV      | 22678  |
-| Influenza A virus | 9279 | 
-| SARS coronavirus 2| 7003|
-| EBV| 4659|
-|Homo sapiens| 3531|
-| HBV| 3190|
-|YFV| 2634|
-| HIV1| 2008 |
-|SARS coronavirus Tor2 |1203|
-| HCV| 884|
+| CMV      | 22443  |
+| Influenza A virus | 9047 | 
+| SARS coronavirus 2 | 6986 |
+| EBV | 4587 |
+| Homo sapiens | 3503 |
+| HBV | 3153 |
+| YFV | 2579 |
+| HIV1 | 1995 |
+| SARS coronavirus Tor2 | 1200 |
+| HCV | 855 |
+
 ```
+
+
