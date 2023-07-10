@@ -4,7 +4,7 @@ from collections import defaultdict
 
 class Sampler:
     '''
-    The Sampler class implements of the negative sampling methods.
+    The Sampler class implements the negative sampling methods.
     This class is from TEINet project by Yuepeng Jiang et al. 
 
     reference:
