@@ -26,6 +26,7 @@ The number of unique TCR beta chain amino acid sequences that recognize each ant
 
 Here show top 10 antigens' name and data size:
 
+
 | Antigen | TCR_num |  
 |:-:|:-:|  
 | CMV      | 22443  |
@@ -39,6 +40,6 @@ Here show top 10 antigens' name and data size:
 | SARS coronavirus Tor2 | 1200 |
 | HCV | 855 |
 
-```
 
+Subsequently, we further filter and use the data as described in *Methods section*.
 
