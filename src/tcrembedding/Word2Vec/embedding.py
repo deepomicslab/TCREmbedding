@@ -104,7 +104,7 @@ class EmbeddingWord2Vec:
 if __name__ == "__main__":
 
     encoder = EmbeddingWord2Vec()
-    encoder.read_csv(f"D:/TCR/TCRantigenData_detailed1.csv", use_columns='CDR3b')
+    encoder.read_csv("data/testdata_Word2Vec.csv", use_columns='CDR3b')
     encode_result = encoder.embed()
     encode_result = np.vstack(encode_result)
     print(encode_result.shape)
