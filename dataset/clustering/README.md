@@ -1,6 +1,6 @@
 ## TCRantigenData_unique
 
-`TCRantigenData_unique.tsv`: RAW DATA, TCR cdr3 sequences with antigen labels. Downloaded from GIANA project ([github](https://github.com/s175573/GIANA/blob/master/data/), [paper (see fig. 2)](https://www.nature.com/articles/s41467-021-25006-7)).
+`TCRantigenData_unique_raw.tsv`: RAW DATA, TCR cdr3 sequences with antigen labels. Downloaded from GIANA project ([github](https://github.com/s175573/GIANA/blob/master/data/), [paper (see fig. 2)](https://www.nature.com/articles/s41467-021-25006-7)).
 
 `TCRantigenData_unique_filt.tsv`: Processed data, filtered by script  `TCRantigenData_process.py`
 
@@ -24,7 +24,7 @@ The number of unique epitope sequences recognized by T cells specific for each a
 -- TCR_num:
 The number of unique TCR beta chain amino acid sequences that recognize each antigen.
 
-Here show top 10 Antigens:
+Here show top 10 antigens' name and data size:
 
 | Antigen | TCR_num |  
 |:-:|:-:|  
