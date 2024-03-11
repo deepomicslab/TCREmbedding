@@ -50,7 +50,7 @@ class EmbeddingWord2Vec:
     def read_csv(self, file_path, use_columns):
         self.data = pd.read_csv(file_path, sep=",", header=0)[use_columns]
 
-    def encode(self):
+    def embed(self):
         if self.model_type == ModelType.SEQUENCE:
             model_creator = SequenceModelCreator()
         else:
@@ -105,7 +105,7 @@ if __name__ == "__main__":
 
     encoder = EmbeddingWord2Vec()
     encoder.read_csv(f"D:/TCR/TCRantigenData_detailed1.csv", use_columns='CDR3b')
-    encode_result = encoder.encode()
+    encode_result = encoder.embed()
     encode_result = np.vstack(encode_result)
     print(encode_result.shape)
 
