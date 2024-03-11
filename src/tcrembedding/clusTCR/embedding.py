@@ -21,7 +21,7 @@ class EmbeddingclusTCR:
             file_path (str): The path to the CSV file containing TCR sequences.
             column_name (str): Column name of the provided file recording TCRs. Defaults to 'full_seq'.
         """
-        row_data = pd.read_csv(file_path, sep="\t", header=0)
+        row_data = pd.read_csv(file_path, sep=",", header=0)
         self.data = row_data[use_columns]
 
     def embed(self):
