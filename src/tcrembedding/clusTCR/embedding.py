@@ -33,6 +33,6 @@ class EmbeddingclusTCR:
 if __name__ == "__main__":
     
     encoder = EmbeddingclusTCR()
-    encoder.read_csv("data/testdata_clusTCR.tsv")
+    encoder.read_csv("data/testdata_clusTCR.csv")
     encode_result = encoder.embed()
     print(encode_result.shape)
