@@ -7,7 +7,7 @@ import seaborn as sns
 import pickle
 
 
-ncols = 4  # Define the number of columns in the figure
+ncols = 5  # Define the number of columns in the figure
 spot_size = 5
 metadata_path = './data/IEDB_uniqueTCR_top10_filt.csv'
 embdir = './data/IEDB_uniqueTCR_top10_filt'
@@ -26,10 +26,17 @@ def vis_umap(testfiles, selected_idx, labels, ncols):
     for variable_name, data in testdata_dict.items():
         print(f'{variable_name}: {data.shape}')
 
-    fig, axs = plt.subplots(nrows=int(np.ceil(len(testdata_dict) / ncols)), ncols=ncols, figsize=(12, 9))
+    predefined_keys = ["clusTCR", "TCRGP", "GIANA", "iSMART", "SETE"]
+    datadriven_keys = [key for key in testdata_dict if (key != "ESM" and key not in predefined_keys)]
+    esm_key = [key for key in testdata_dict if key == "ESM"]
+
+
+    fig, axs = plt.subplots(nrows=int(np.ceil(len(testdata_dict) / ncols)), ncols=ncols, figsize=(12, 7))
     plt.subplots_adjust(wspace=0.3, hspace=0.3, bottom=0.1)
 
-    for i, (name, data) in enumerate(testdata_dict.items()):
+    # for i, (name, data) in enumerate(testdata_dict.items()):
+    for i, name in enumerate(predefined_keys + datadriven_keys + esm_key):
+        data = testdata_dict[name]
 
         ax = axs.flatten()[i]
         reducer = umap.UMAP(n_neighbors=20, min_dist=0.3, random_state=42)
@@ -60,8 +67,6 @@ def vis_umap(testfiles, selected_idx, labels, ncols):
 
 testfiles = [file for file in os.listdir(embdir) if file.endswith('pkl')]
 metadata = pd.read_csv(metadata_path)
-## 0 for Negative, 1 for Positive
-metadata['Affinity'] = metadata['Affinity'].apply(lambda x: 'Negative' if x == 0 else 'Positive')
 
 ## case1: show CDR3s binding with top 10 epitopes (positive)
 subdata = metadata[metadata['Affinity']==1]
