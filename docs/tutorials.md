@@ -5,7 +5,7 @@
 TCRembedding is a composite of multiple methods for embedding amino acid sequences.It is available on PyPI and can be downloaded and installed via pip:
 
 ```
-pip install TCR-embedding==1.0.0
+pip install tcrembedding==1.0.0
 ```
 
 ### Installation Tutorial
@@ -41,7 +41,7 @@ source /media/lihe/TCR/Word2Vec/Word2vec/Word2vec_venv/bin/activate
 After entering the virtual environment, use the pip command to install TCRembedding.
 
 ```
-pip install TCRembedding
+pip install tcrembedding==1.0.0
 ```
 
 ## Data
