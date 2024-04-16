@@ -41,7 +41,7 @@ source /media/lihe/TCR/Word2Vec/Word2vec/Word2vec_venv/bin/activate
 After entering the virtual environment, use the pip command to install TCRembedding.
 
 ```
-pip install TCRembedding
+pip install tcrembedding==1.0.0
 ```
 
 ## Data
