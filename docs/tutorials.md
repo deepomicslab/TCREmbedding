@@ -5,7 +5,7 @@
 TCRembedding is a composite of multiple methods for embedding amino acid sequences.It is available on PyPI and can be downloaded and installed via pip:
 
 ```
-pip install TCR-embedding==1.0.0
+pip install tcrembedding==1.0.0
 ```
 
 ### Installation Tutorial
