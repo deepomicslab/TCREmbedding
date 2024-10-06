@@ -1,3 +1,4 @@
+from gensim.models import Word2Vec
 import os
 from .KmerHelper import KmerGenerator
 from .SequenceModelCreator import SequenceModelCreator
@@ -44,12 +45,6 @@ class EmbeddingWord2Vec:
         self.data = pd.read_csv(file_path, sep=",", header=0)[use_columns]
 
     def embed(self):
-        if self.model_type == ModelType.SEQUENCE:
-            model_creator = SequenceModelCreator()
-        else:
-            model_creator = KmerPairModelCreator()
-        model = model_creator.create_model(self.data, self.k, self.vector_size)
-
         contexts = []
         for sequence in self.data:
             if self.model_type == ModelType.SEQUENCE:
@@ -61,6 +56,20 @@ class EmbeddingWord2Vec:
             else:
                 raise ValueError("Invalid model_type")
             contexts.append(context)
+
+        if self.pretrained_word2vec_model is None:
+            if self.model_type == ModelType.SEQUENCE:
+                model_creator = SequenceModelCreator()
+            else:
+                model_creator = KmerPairModelCreator()
+            model = model_creator.create_model(self.data, self.k, self.vector_size)
+        else:
+            model_path = self.pretrained_word2vec_model
+            if not os.path.exists(model_path):
+                print(f"Error: The model file at '{model_path}' does not exist.")
+                return None
+            else:                    
+                model = Word2Vec.load(model_path)
 
 
         if self.model_type == ModelType.SEQUENCE:
