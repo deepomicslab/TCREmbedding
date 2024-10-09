@@ -41,4 +41,4 @@ Here show top 10 antigens' name and data size:
 | HCV | 855 |
 
 
-Subsequently, we refined this collection by excluding sequences outside the 10 to 30 amino acid range and those lacking labels with epitope AA sequence. Additionally, we removed clusters with fewer than 100 sequences and downsampled larger clusters to balance the classes. The processed dataset, `TCRantigenData_unique_test.tsv`, comprised 9,033 TCR sequences across 25 antigen clusters.
+Subsequently, we refined this collection by excluding sequences outside the 10 to 30 amino acid range and those lacking labels with epitope AA sequence. Additionally, we removed clusters with fewer than 100 sequences and downsampled larger clusters to balance the classes. The processed dataset, `TCRantigenData_unique_test.csv`, comprised 9,033 TCR sequences across 25 antigen clusters.
