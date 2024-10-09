@@ -14,4 +14,4 @@ The dataset was originally sourced from the catELMo project, which provides a co
 
 ### TCRanno Model Retraining Dataset
 
-We retrain the model TCRanno with the hold-out CDR3-epitope paired dataset to avoid data leakage in the clustering test.
+`TCRanno_retrain_trainset.pkl` and `TCRanno_retrain_valset.pkl` contain epitope-label CDR3 sequences without overlap with the test dataset for clustering experiments. We retrain the model TCRanno with the hold-out trainset to avoid data leakage in the clustering test.
