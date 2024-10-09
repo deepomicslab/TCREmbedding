@@ -1,8 +1,8 @@
 ## TCRantigenData_unique
 
-`TCRantigenData_unique_raw.tsv`: RAW DATA, TCR cdr3 sequences with antigen labels. Downloaded from GIANA project ([github](https://github.com/s175573/GIANA/blob/master/data/), [paper (see fig. 2)](https://www.nature.com/articles/s41467-021-25006-7)).
+`rawdata/TCRantigenData_unique_raw.tsv`: RAW DATA, TCR cdr3 sequences with antigen labels. Downloaded from GIANA project ([github](https://github.com/s175573/GIANA/blob/master/data/), [paper (see fig. 2)](https://www.nature.com/articles/s41467-021-25006-7)).
 
-`TCRantigenData_unique_filt.tsv`: Processed data, filtered by script  `TCRantigenData_process.py`
+`rawdata/TCRantigenData_unique_filt.tsv`: Processed data, filtered by script  `rawdata/TCRantigenData_process.py`
 
 columns in the processed data:
 
