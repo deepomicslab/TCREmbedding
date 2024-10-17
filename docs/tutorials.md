@@ -5,7 +5,7 @@
 TCRembedding is a composite of multiple methods for embedding amino acid sequences.It is available on PyPI and can be downloaded and installed via pip:
 
 ```
-pip install tcrembedding==1.0.0
+pip install tcrembedding
 ```
 
 ### Installation Tutorial
@@ -41,7 +41,7 @@ source /media/lihe/TCR/Word2Vec/Word2vec/Word2vec_venv/bin/activate
 After entering the virtual environment, use the pip command to install TCRembedding.
 
 ```
-pip install tcrembedding==1.0.0
+pip install tcrembedding
 ```
 
 ## Data
@@ -128,12 +128,15 @@ embedder.load_model(weights_file='model/weights.hdf5', options_file='model/optio
 tcr_embeds = embedder.embed()
 print(tcr_embeds.shape)
 
-# if you want to embed epitope, you can set the value of the use_columns parameter in load_data() to the column name of the column where the epitope is located.
+# if you want to embed epitope, you can set the value of the use_columns parameter in 
+# load_data() to the column name of the column where the epitope is located.
 # then use embed_epitope() to embed.
 embedder.load_data("data/testdata_catELMo.csv", use_columns='Epitope')
 epi_embeds = embedder.embed_epitope()
 print(epi_embeds.shape)
 ```
+
+Note: We place models for download at Hugging Face.  You need to specify the path to the model via *weights_file* in *load_model()* and the path to options file via *options_file* in *load_model()* before you run catELMo to embed sequences.Download link:[lihe088/TCRembedding at main (huggingface.co)](https://huggingface.co/lihe088/TCRembedding/tree/main/catELMo).
 
 ### 3.clusTCR
 
@@ -209,12 +212,16 @@ print(encode_result.shape)
 from TCRembedding import get_embedding_instance
 
 encoder = get_embedding_instance("EmbeddingDeepTCR")
-encoder.load_model(model_folder_name="Test_Model", Load_Prev_Data=True)
+# If you have a pre-trained model, you can specify the path to the folder where the model is 
+# located by using the model_folder_name parameter of the load_model() function.
+encoder.load_model(train_data_directory='Data/data', model_folder_name="Test_Model", Load_Prev_Data=True)
 encoder_result = encoder.embed(encode_data_directory="Data/data")
 print(encoder_result.shape)
 ```
 
 ​	Note: The parameter "encode_data_directory" in embed() specifies the path of the input file, but the embed() method will take all the files under the path as input files.
+
+​        We place models for download at Hugging Face.  You need to specify the path to the folder where the model is located before you run DeepTCR to embed sequences.Download link:[lihe088/TCRembedding at main (huggingface.co)](https://huggingface.co/lihe088/TCRembedding/tree/main/DeepTCR)
 
 ### 6.ERGO-II
 
@@ -249,6 +256,8 @@ pep_encode_result = pep_encoding.detach().numpy()
 print(tcrb_encoding.shape)
 print(pep_encoding.shape)
 ```
+
+Note: We place models for download at Hugging Face. You need to specify the path to the model via *model_path* of *load_model()* before you run catELMo to embed sequences.Download link:https://huggingface.co/lihe088/TCRembedding/tree/main/ERGOII. 
 
 ### 7.ESM
 
@@ -330,7 +339,7 @@ from TCRembedding import get_embedding_instance
 import numpy as np
 
 encoder = get_embedding_instance("EmbeddingGIANA")
-encoder.read_csv("/media/lihe/TCR/project/src/TCRembedding/GIANA/data/testdata_GIANA.csv", use_columns="CDR3b")
+encoder.read_csv("data/testdata_GIANA.csv", use_columns="CDR3b")
 encoder.load_model()
 vectors = encoder.embed()
 encode_result = np.vstack(vectors)
@@ -478,10 +487,14 @@ print(embedding_data.shape)
 from TCRembedding import get_embedding_instance
 
 encoder = get_embedding_instance("EmbeddingpMTnet")
-TCR_encoded_matrix, antigen_array = encoder.embed("data/testdata_pMTnet.csv")
+# If you have a pre-trained model, you can specify the path to the folder where the 
+# model(.h5) is located by using the model_dir parameter of the embed() function.
+TCR_encoded_matrix, antigen_array = encoder.embed("data/testdata_pMTnet.csv", model_dir='library/h5_file')
 print(TCR_encoded_matrix.shape)
 print(antigen_array.shape)
 ```
+
+Note: We place models for download at Hugging Face.  Download link:[lihe088/TCRembedding at main (huggingface.co)](https://huggingface.co/lihe088/TCRembedding/tree/main/pMTnet)
 
 ### 14.SETE
 
@@ -618,13 +631,42 @@ print(TCR_encode_result.shape)
 ```
 from TCRembedding import get_embedding_instance
 import numpy as np
+from gensim.models.callbacks import CallbackAny2Vec
 
+class LossLogger(CallbackAny2Vec):
+    """Callback to log loss after each epoch, differentiated by kmer batch."""
+
+    def __init__(self, log_file):
+        self.epoch = 0
+        self.kmer_index = 0
+        self.log_file = log_file
+        self.loss_previous_step = 0
+
+    def on_epoch_end(self, model):
+        loss = model.get_latest_training_loss()
+        loss_this_step = loss - self.loss_previous_step
+        self.loss_previous_step = loss
+        self.epoch += 1
+        with open(self.log_file, 'a') as f:
+            f.write(f'Kmer {self.kmer_index}, Epoch {self.epoch}: Loss {loss_this_step}\n')
+
+    def reset_epoch(self, kmer_index):
+        """Resets the epoch count and previous loss when a new kmer batch starts."""
+        self.epoch = 0
+        self.kmer_index = kmer_index
+        self.loss_previous_step = 0
+        
 encoder = get_embedding_instance("EmbeddingWord2Vec")
+# If there is a pre-trained model, you can specify the model path via the
+# pretrained_word2vec_model parameter
+# encoder.pretrained_word2vec_model = 'model path' 
 encoder.load_data("data/testdata_Word2Vec.csv", use_columns='CDR3b')
 encode_result = encoder.embed()
 encode_result = np.vstack(encode_result)
 print(encode_result.shape)
 ```
+
+Note:We place models for download at Hugging Face.  Download link:[lihe088/TCRembedding at main (huggingface.co)](https://huggingface.co/lihe088/TCRembedding/tree/main/Word2Vec)
 
 ### 19.TCRpeg
 
@@ -656,10 +698,14 @@ print(encode_result.shape)
 from TCRembedding import get_embedding_instance
 
 encoder = get_embedding_instance("EmbeddingTCRpeg")
+encoder.model_path = "tcrpeg/models/tcrpeg.pth"
+encoder.embedding_path = "tcrpeg/data/embedding_32.txt"
 encoder.load_data(file_path="data/testdata_TCRpeg.csv", use_columns="CDR3b")
 encode_result = encoder.embed()
 print(encode_result.shape)
 ```
+
+Note: We place models for download at Hugging Face.  You need to specify the path to the model before you run TCRpeg to embed sequences.Download link:[lihe088/TCRembedding at main (huggingface.co)](https://huggingface.co/lihe088/TCRembedding/tree/main/TCRpeg).
 
 ## Citation
 
