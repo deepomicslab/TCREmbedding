@@ -9,7 +9,7 @@ class VirtualEnvManager:
         self.base_dir = Path(base_dir)
 
     def setup_virtualenv(self, env_name, custom_env_dir=None, mirror_url=None):
-        requirements_path = self.base_dir / env_name / "requirements.txt"
+        requirements_path = self.base_dir / "requirements.txt"
         env_dir = Path(custom_env_dir) if custom_env_dir else self.base_dir / env_name / f"{env_name}_venv"
 
         if not env_dir.exists():
