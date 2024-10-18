@@ -6,6 +6,5 @@ pytz==2024.1
 scikit-learn==1.3.2
 scipy==1.10.1
 six==1.16.0
-tcr-embedding==1.5.0
 threadpoolctl==3.3.0
 tzdata==2024.1
