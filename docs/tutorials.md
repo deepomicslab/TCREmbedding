@@ -10,6 +10,8 @@ pip install tcrembedding
 
 ### Installation Tutorial
 
+#### 1.python venv
+
 Since different methods rely on different runtime environments and there may be version conflicts between the dependent packages, we suggest that you create a virtual environment to use the embedding methods. At the same time, we provide an installation script *env_creator.py*, the script will be based on different embedding methods, create the corresponding virtual environment. The following is an example of how to use it:
 
 (recommended) Based on Linux , python 3.8.
@@ -44,9 +46,24 @@ After entering the virtual environment, use the pip command to install TCRembedd
 pip install tcrembedding
 ```
 
+#### 2.conda
+
+In addition to running the *env_creator.py* script to create virtual environments, you can also create and manage virtual environments via *conda*.
+
+Example:
+
+```
+conda create --name word2vec python=3.8
+
+conda activate word2vec
+
+pip install -r src/TCRembedding/Word2Vec/requirements.txt
+pip install tcrembedding
+```
+
 ## Data
 
-All the data used in the paper is publicly available, so we suggest readers refer to the original papers for more details. We also upload the processed data which can be downloaded via *******.
+All the data used in the paper is publicly available, so we suggest readers refer to the original papers for more details. We uploaded the processed data to *dataset* folder for download.
 
 ##  Usage Tutorial
 
