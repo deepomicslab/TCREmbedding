@@ -16,13 +16,23 @@ class VirtualEnvManager:
             env_dir.mkdir(parents=True, exist_ok=True)
             print(f"Creating virtual environment at {env_dir} for {env_name}...")
             subprocess.run(["python", "-m", "venv", str(env_dir)], check=True)
-            subprocess.run(["python", "-m", "pip", "install", "--upgrade", "pip", "-i", mirror_url])
+            
+            # Upgrade pip with or without mirror URL
+            pip_upgrade_command = ["python", "-m", "pip", "install", "--upgrade", "pip"]
+            if mirror_url:
+                pip_upgrade_command += ["-i", mirror_url]
+            subprocess.run(pip_upgrade_command, check=True)
+            
+            print(requirements_path)
             if requirements_path.exists():
                 print(f"Installing dependencies for {env_name} from {requirements_path}...")
                 pip_command = env_dir / "bin" / "pip" if platform.system() != "Windows" else env_dir / "Scripts" / "pip"
                 install_command = [str(pip_command), "install", "-r", str(requirements_path)]
+                
+                # Add mirror URL if provided
                 if mirror_url:
                     install_command += ["-i", mirror_url]
+                
                 subprocess.run(install_command, check=True)
             else:
                 print(f"No requirements.txt found for {env_name}. Skipping dependencies installation.")
