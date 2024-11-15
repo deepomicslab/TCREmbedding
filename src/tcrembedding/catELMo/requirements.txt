@@ -118,7 +118,7 @@ tensorboard==2.2.2
 tensorboard-plugin-wit==1.8.1
 tensorboardX==2.6.2.2
 tensorflow-estimator==2.2.0
-tensorflow-gpu==2.2.0
+#tensorflow-gpu==2.2.0
 termcolor==2.4.0
 thinc==7.0.8
 threadpoolctl==3.2.0
