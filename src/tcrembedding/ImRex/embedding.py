@@ -30,7 +30,7 @@ class EmbeddingImRex:
         self.cdr3_range = cdr3_range
         self.create_neg_dataset = create_neg_dataset
 
-    def read_csv(self, filepath="data/testdata_ImRex.csv", negative_data_filepath="embedding/negative_data.csv", full_dataset_path="embedding/positive_data.csv", cdr3_header="CDR3b", epitope_header="Epitope"):
+    def load_data(self, filepath="data/testdata_ImRex.csv", negative_data_filepath="embedding/negative_data.csv", full_dataset_path="embedding/positive_data.csv", cdr3_header="CDR3b", epitope_header="Epitope"):
         """
         full_dataset_path : Path
         The entire cdr3-epitope dataset, before splitting into folds, restricting length or downsampling. Used to avoid
@@ -106,7 +106,7 @@ class EmbeddingImRex:
 if __name__ == "__main__":
     encoder = EmbeddingImRex()
     
-    encoder.read_csv("data/testdata_ImRex.csv")
+    encoder.load_data("data/testdata_ImRex.csv")
     encode_result = encoder.embed()
     
     iter_tf_dataset = iter(encode_result)
@@ -115,5 +115,6 @@ if __name__ == "__main__":
     for item in iter_tf_dataset:
         paired_map, affinity = item
         paired_map_list.append(paired_map.numpy())
-    print(paired_map_list)
-
+        
+    encode_result = np.stack(paired_map_list)
+    print(encode_result.shape)
