@@ -7,8 +7,8 @@ class EmbeddingiSMART:
     def __init__(self):
         self.model = None
 
-    def read_csv(self, file_path, use_columns):
-        self.data = pd.read_csv(file_path, header=0, sep=",")[use_columns]
+    def load_data(self, file_path, use_columns, sep=","):
+        self.data = pd.read_csv(file_path, header=0, sep=sep)[use_columns]
 
     def load_model(self):
         self.model = iSMART_model()
@@ -34,7 +34,7 @@ class EmbeddingiSMART:
 if __name__ == "__main__":
 
     encoder = EmbeddingiSMART()
-    encoder.read_csv("data/testdata_iSMART.csv", use_columns="CDR3b")
+    encoder.load_data("data/testdata_iSMART.csv", use_columns="CDR3b")
     encoder.load_model()
     encode_result = encoder.embed()
 
