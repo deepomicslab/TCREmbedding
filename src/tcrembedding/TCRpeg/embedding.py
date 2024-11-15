@@ -36,5 +36,6 @@ class EmbeddingTCRpeg:
 # Example usage
 if __name__ == "__main__":
     embedder = EmbeddingTCRpeg(hidden_size=128, num_layers=4, device="cpu")
-    embeddings = embedder.embed("data/testdata_TCRpeg.csv", use_columns="CDR3b")
-    print(embeddings)
+    embedder.load_data(file_path="data/testdata_TCRpeg.csv", use_columns="CDR3b")
+    embeddings = embedder.embed()
+    print(embeddings.shape)
