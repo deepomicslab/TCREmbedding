@@ -16,7 +16,7 @@ class EmbeddingTCRanno:
 
         self.encoder = model_predict.load_encoder(model_path=model_path)
 
-    def read_csv(self, file_path='./data/sample.csv', column_name='aminoAcid'):
+    def load_data(self, file_path='./data/sample.csv', column_name='aminoAcid'):
         """Read TCR sequences from a CSV file.
 
         Args:
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     # Load model and data
     embedder = EmbeddingTCRanno()
     embedder.load_model(model_path = None)  ## set model_path=None to use the default model (provided by TCRanno)
-    embedder.read_csv(file_path='data/testdata_TCRanno.csv', column_name='CDR3b')
+    embedder.load_data(file_path='data/testdata_TCRanno.csv', column_name='CDR3b')
 
     # Get embeddings
     X = embedder.embed()
