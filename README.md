@@ -59,6 +59,8 @@ conda activate word2vec
 pip install -r src/TCRembedding/Word2Vec/requirements.txt
 pip install tcrembedding
 ```
+Note:
+If you encounter an issue during installation with the message "cannot import name 'msvccompiler' from 'distutils'," please first ensure that the setuptools version is below 65.0.0 or use version 65.0.2. Additionally, add the ```--no-build-isolation``` parameter when using the pip command.
 
 ## 
 
