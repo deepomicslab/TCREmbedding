@@ -6,7 +6,7 @@ name = "TCRembedding"
 version = "1.0.0"
 authors = [
   { name="Xikang Feng", email="" },
-  { name="Miaozhe Huo", email=""}
+  { name="Miaozhe Huo", email=""},
   { name="He Li", email=""},
   { name="Yongze Yang", email=""},
 ]
