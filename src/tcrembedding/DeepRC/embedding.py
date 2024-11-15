@@ -30,6 +30,6 @@ class EmbeddingDeepRC:
 if __name__ == "__main__":
 
     encoder = EmbeddingDeepRC()
-    encoder.read_csv("data/testdata_DeepRC.csv", use_columns="CDR3b")
+    encoder.load_data("data/testdata_DeepRC.csv", use_columns="CDR3b")
     encode_result = encoder.embed()
     print(encode_result.shape)
