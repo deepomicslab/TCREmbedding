@@ -66,9 +66,8 @@ If you encounter an issue during installation with the message "cannot import na
 
 ## Citation
 
-If you use `TCREmbedding` in your work, please cite the `TCREmbedding` publication as follows:
+If you use `TCREmbedding` in your work, please cite the `TCREmbedding` publication as follow:
 
-> to do
-
+Xikang Feng, Miaozhe Huo, He Li, Yongze Yang, Yuepeng Jiang, Liang He, Shuai Cheng Li, A comprehensive benchmarking for evaluating TCR embeddings in modeling TCR-epitope interactions, Briefings in Bioinformatics, Volume 26, Issue 1, January 2025, bbaf030, https://doi.org/10.1093/bib/bbaf030
 
 [documentation]: https://tcrembedding.readthedocs.io
